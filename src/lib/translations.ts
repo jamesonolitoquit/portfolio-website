@@ -2,7 +2,7 @@ export const translations = {
   en: {
     hero: {
       greeting: "Hi, I'm",
-      role: "Web Developer, Full Stack Developer, Wix Studio Designer",
+      role: "Self-taught Full-Stack Developer | Next.js, TypeScript & Modern Web Solutions",
       viewProjects: "View Projects",
       contactMe: "Contact Me"
     },
@@ -11,6 +11,7 @@ export const translations = {
       projects: "Projects",
       skills: "Skills",
       about: "About",
+      cv: "CV",
       contact: "Contact"
     },
     projects: {
@@ -33,7 +34,7 @@ export const translations = {
     },
     about: {
       title: "About Me",
-      description: "I am a passionate web developer with expertise in full-stack development and Wix Studio design. I love solving complex problems and creating intuitive user experiences. My approach combines technical expertise with creative thinking to deliver high-quality solutions.",
+      description: "Self-taught full-stack developer specializing in modern web technologies. I craft scalable solutions using Next.js, TypeScript, and cutting-edge frameworks. With expertise in both development and design, I deliver user-focused applications that balance performance, functionality, and aesthetic excellence. Available for freelance projects and remote collaboration.",
       process: {
         title: "My Process",
         plan: "Understand requirements and plan the solution",

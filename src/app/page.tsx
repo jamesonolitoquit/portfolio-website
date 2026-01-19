@@ -4,6 +4,7 @@ import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import ScrollProgress from '@/components/ScrollProgress'
+import ProjectCarousel from '@/components/ProjectCarousel'
 import { translations } from '@/lib/translations'
 
 const Navbar = dynamic(() => import('@/components/Navbar'), { ssr: false })
@@ -68,53 +69,7 @@ export default function Home() {
             >
               {t.projects.title}
             </motion.h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Project 1 */}
-              <motion.div
-                className="bg-surface p-6 rounded-lg hover:shadow-lg transition-shadow"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-              >
-                <h3 className="text-xl font-semibold mb-2">{t.projects.project1.title}</h3>
-                <p className="text-text-secondary mb-4">
-                  {t.projects.project1.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {t.projects.project1.tech.map((tech: string, index: number) => (
-                    <span key={index} className="bg-primary/20 text-primary px-2 py-1 rounded text-sm">{tech}</span>
-                  ))}
-                </div>
-                <div className="flex gap-4">
-                  <a href="#" className="text-primary hover:underline">{t.projects.liveDemo}</a>
-                  <a href="https://github.com/jamesonolitoquit" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{t.projects.github}</a>
-                </div>
-              </motion.div>
-
-              {/* Project 2 */}
-              <motion.div
-                className="bg-surface p-6 rounded-lg hover:shadow-lg transition-shadow"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-              >
-                <h3 className="text-xl font-semibold mb-2">{t.projects.project2.title}</h3>
-                <p className="text-text-secondary mb-4">
-                  {t.projects.project2.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {t.projects.project2.tech.map((tech: string, index: number) => (
-                    <span key={index} className="bg-primary/20 text-primary px-2 py-1 rounded text-sm">{tech}</span>
-                  ))}
-                </div>
-                <div className="flex gap-4">
-                  <a href="#" className="text-primary hover:underline">{t.projects.liveDemo}</a>
-                  <a href="https://github.com/jamesonolitoquit" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{t.projects.github}</a>
-                </div>
-              </motion.div>
-            </div>
+            <ProjectCarousel />
           </div>
         </section>
 
@@ -129,7 +84,7 @@ export default function Home() {
             >
               {t.skills.title}
             </motion.h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <motion.div
                 className="text-center bg-background p-4 rounded-lg"
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -137,8 +92,8 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
               >
-                <div className="text-4xl mb-2">🌐</div>
-                <p className="font-medium">HTML</p>
+                <div className="text-4xl mb-2">⚛️</div>
+                <p className="font-medium">Next.js</p>
               </motion.div>
               <motion.div
                 className="text-center bg-background p-4 rounded-lg"
@@ -147,8 +102,8 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
               >
-                <div className="text-4xl mb-2">🎨</div>
-                <p className="font-medium">CSS</p>
+                <div className="text-4xl mb-2">⚡</div>
+                <p className="font-medium">TypeScript</p>
               </motion.div>
               <motion.div
                 className="text-center bg-background p-4 rounded-lg"
@@ -157,8 +112,8 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
               >
-                <div className="text-4xl mb-2">🟨</div>
-                <p className="font-medium">JavaScript</p>
+                <div className="text-4xl mb-2">🎨</div>
+                <p className="font-medium">Tailwind CSS</p>
               </motion.div>
               <motion.div
                 className="text-center bg-background p-4 rounded-lg"
@@ -167,8 +122,8 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
               >
-                <div className="text-4xl mb-2">⚛️</div>
-                <p className="font-medium">React</p>
+                <div className="text-4xl mb-2">🔥</div>
+                <p className="font-medium">Firebase</p>
               </motion.div>
               <motion.div
                 className="text-center bg-background p-4 rounded-lg"
@@ -177,8 +132,8 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.5 }}
               >
-                <div className="text-4xl mb-2">🟢</div>
-                <p className="font-medium">Node.js</p>
+                <div className="text-4xl mb-2">▲</div>
+                <p className="font-medium">Vercel</p>
               </motion.div>
               <motion.div
                 className="text-center bg-background p-4 rounded-lg"
@@ -187,8 +142,28 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.6 }}
               >
-                <div className="text-4xl mb-2">🐍</div>
-                <p className="font-medium">Python</p>
+                <div className="text-4xl mb-2">🟫</div>
+                <p className="font-medium">Wix Studio</p>
+              </motion.div>
+              <motion.div
+                className="text-center bg-background p-4 rounded-lg"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.7 }}
+              >
+                <div className="text-4xl mb-2">🌐</div>
+                <p className="font-medium">React</p>
+              </motion.div>
+              <motion.div
+                className="text-center bg-background p-4 rounded-lg"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.8 }}
+              >
+                <div className="text-4xl mb-2">📱</div>
+                <p className="font-medium">Responsive Design</p>
               </motion.div>
             </div>
           </div>
