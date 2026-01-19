@@ -12,8 +12,8 @@ const skills: Skill[] = [
   { name: "TypeScript", icon: "💎", description: "A typed superset of JavaScript that compiles to plain JavaScript." },
   { name: "Tailwind CSS", icon: "🎨", description: "A utility-first CSS framework for rapid UI development." },
   { name: "Firebase", icon: "🔥", description: "A platform for building web and mobile applications with backend services." },
-  { name: "Vercel", icon: "▲", description: "A platform for frontend frameworks and static sites with serverless functions." },
-  { name: "Wix Studio", icon: "🟫", description: "A visual development platform for creating websites and web applications." },
+  { name: "Vercel", icon: "△", description: "A platform for frontend frameworks and static sites with serverless functions." },
+  { name: "Wix Studio", icon: "🏗️", description: "A visual development platform for creating websites and web applications." },
   { name: "React", icon: "⚛️", description: "A JavaScript library for building user interfaces." },
   { name: "Responsive Design", icon: "📱", description: "Designing websites that work on all device sizes." },
   { name: "PostgreSQL", icon: "🐘", description: "An advanced open-source relational database." },
@@ -25,6 +25,7 @@ const SkillCarousel: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [hoveredSkill, setHoveredSkill] = useState<Skill | null>(null);
+  const [tooltipPosition, setTooltipPosition] = useState<{ x: number; y: number } | null>(null);
 
   // Auto-rotation functionality
   useEffect(() => {
@@ -46,10 +47,7 @@ const SkillCarousel: React.FC = () => {
       className="relative w-full flex justify-center items-center overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{ 
-        perspective: '1200px',
-        minHeight: '600px' // Ensure enough height for tooltip below carousel
-      }} // Increased perspective for better 3D effect
+      style={{ perspective: '1200px' }} // Increased perspective for better 3D effect
     >
       <div
         className="relative"
@@ -95,8 +93,14 @@ const SkillCarousel: React.FC = () => {
                 stiffness: 300,
                 damping: 25
               }}
-              onMouseEnter={() => setHoveredSkill(skill)}
-              onMouseLeave={() => setHoveredSkill(null)}
+              onMouseEnter={() => {
+                setHoveredSkill(skill);
+                setTooltipPosition({ x: centerX + x, y: centerY + 80 });
+              }}
+              onMouseLeave={() => {
+                setHoveredSkill(null);
+                setTooltipPosition(null);
+              }}
             >
               {/* Icon */}
               <div className="text-7xl mb-2">{skill.icon}</div>
@@ -109,16 +113,16 @@ const SkillCarousel: React.FC = () => {
         })}
       </div>
       
-      {/* Tooltip positioned below the carousel */}
-      {hoveredSkill && (
+      {/* Tooltip positioned below the hovered skill */}
+      {hoveredSkill && tooltipPosition && (
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
+          exit={{ opacity: 0, y: 10 }}
           className="absolute bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg pointer-events-none z-50 max-w-xs text-center"
           style={{
-            top: '520px', // Position below the 500px carousel with some margin
-            left: '50%',
+            left: tooltipPosition.x,
+            top: tooltipPosition.y,
             transform: 'translateX(-50%)'
           }}
         >
