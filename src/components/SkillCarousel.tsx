@@ -15,34 +15,61 @@ const skills: Skill[] = [
   { name: "Vercel", icon: "▲" },
   { name: "Wix Studio", icon: "🟫" },
   { name: "React", icon: "🌐" },
-  { name: "Responsive Design", icon: "📱" }
+  { name: "Responsive Design", icon: "📱" },
+  { name: "PostgreSQL", icon: "🐘" },
+  { name: "MySQL", icon: "🗄️" },
+  { name: "MongoDB", icon: "🍃" }
 ];
 
 const SkillCarousel: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [direction, setDirection] = useState(1);
+  const [skillsPerPage, setSkillsPerPage] = useState(1);
 
-  // Auto-scroll functionality
+  // Responsive skills per page
+  useEffect(() => {
+    const updateSkillsPerPage = () => {
+      const width = window.innerWidth;
+      if (width >= 1280) setSkillsPerPage(10); // xl
+      else if (width >= 1024) setSkillsPerPage(8); // lg
+      else if (width >= 768) setSkillsPerPage(6); // md
+      else if (width >= 640) setSkillsPerPage(4); // sm
+      else setSkillsPerPage(1); // mobile
+    };
+
+    updateSkillsPerPage();
+    window.addEventListener('resize', updateSkillsPerPage);
+    return () => window.removeEventListener('resize', updateSkillsPerPage);
+  }, []);
+
+  const totalPages = Math.ceil(skills.length / skillsPerPage);
+
+  // Auto-scroll functionality - faster (1.5 seconds)
   useEffect(() => {
     if (isHovered) return;
 
     const interval = setInterval(() => {
       setDirection(1);
-      setCurrentIndex((prev) => (prev + 1) % skills.length);
-    }, 3000); // Change every 3 seconds
+      setCurrentPage((prev) => (prev + 1) % totalPages);
+    }, 1500); // Changed from 3000 to 1500 for faster rotation
 
     return () => clearInterval(interval);
-  }, [isHovered]);
+  }, [isHovered, totalPages]);
 
-  const nextSkill = () => {
+  const nextPage = () => {
     setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % skills.length);
+    setCurrentPage((prev) => (prev + 1) % totalPages);
   };
 
-  const prevSkill = () => {
+  const prevPage = () => {
     setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + skills.length) % skills.length);
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+  };
+
+  const getCurrentPageSkills = () => {
+    const startIndex = currentPage * skillsPerPage;
+    return skills.slice(startIndex, startIndex + skillsPerPage);
   };
 
   const slideVariants = {
@@ -65,7 +92,7 @@ const SkillCarousel: React.FC = () => {
     }),
   };
 
-  const currentSkill = skills[currentIndex];
+  const currentSkills = getCurrentPageSkills();
 
   return (
     <div
@@ -76,7 +103,7 @@ const SkillCarousel: React.FC = () => {
       <div className="relative overflow-hidden rounded-lg bg-surface p-8">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
-            key={currentIndex}
+            key={currentPage}
             custom={direction}
             variants={slideVariants}
             initial="enter"
@@ -87,48 +114,61 @@ const SkillCarousel: React.FC = () => {
               opacity: { duration: 0.3 },
               scale: { duration: 0.3 }
             }}
-            className="text-center"
           >
-            <div className="text-6xl mb-4">{currentSkill.icon}</div>
-            <p className="font-medium text-lg">{currentSkill.name}</p>
+            <div className={`grid gap-6 ${
+              skillsPerPage === 1 ? 'grid-cols-1' :
+              skillsPerPage === 4 ? 'grid-cols-2' :
+              skillsPerPage === 6 ? 'grid-cols-3' :
+              skillsPerPage === 8 ? 'grid-cols-4' :
+              'grid-cols-5'
+            }`}>
+              {currentSkills.map((skill, index) => (
+                <div key={`${currentPage}-${index}`} className="text-center">
+                  <div className="text-4xl md:text-5xl mb-2">{skill.icon}</div>
+                  <p className="font-medium text-sm md:text-base">{skill.name}</p>
+                </div>
+              ))}
+            </div>
           </motion.div>
         </AnimatePresence>
       </div>
 
       {/* Navigation buttons */}
       <button
-        onClick={prevSkill}
+        onClick={prevPage}
         className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background border border-primary/20 rounded-full p-2 transition-colors z-10"
-        aria-label="Previous skill"
+        aria-label="Previous skills"
       >
         <ChevronLeft className="w-5 h-5" />
       </button>
       <button
-        onClick={nextSkill}
+        onClick={nextPage}
         className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background border border-primary/20 rounded-full p-2 transition-colors z-10"
-        aria-label="Next skill"
+        aria-label="Next skills"
       >
         <ChevronRight className="w-5 h-5" />
       </button>
 
       {/* Dots indicator */}
       <div className="flex justify-center mt-4 space-x-2">
-        {skills.map((_, index) => (
+        {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
             onClick={() => {
-              setDirection(index > currentIndex ? 1 : -1);
-              setCurrentIndex(index);
+              setDirection(index > currentPage ? 1 : -1);
+              setCurrentPage(index);
             }}
             className={`w-2 h-2 rounded-full transition-colors ${
-              index === currentIndex ? 'bg-primary' : 'bg-primary/30'
+              index === currentPage ? 'bg-primary' : 'bg-primary/30'
             }`}
-            aria-label={`Go to skill ${index + 1}`}
+            aria-label={`Go to skills page ${index + 1}`}
           />
         ))}
       </div>
     </div>
   );
 };
+
+export default SkillCarousel;
 
 export default SkillCarousel;
