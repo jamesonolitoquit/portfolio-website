@@ -170,5 +170,3 @@ const SkillCarousel: React.FC = () => {
 };
 
 export default SkillCarousel;
-
-export default SkillCarousel;
