@@ -38,6 +38,16 @@ const SkillCarousel: React.FC = () => {
     return () => clearInterval(interval);
   }, [isHovered]);
 
+  const skillAngle = 360 / skills.length; // Degrees per skill
+
+  const rotateLeft = () => {
+    setRotation(prev => prev - skillAngle);
+  };
+
+  const rotateRight = () => {
+    setRotation(prev => prev + skillAngle);
+  };
+
   const radius = 300; // Increased radius for larger carousel
   const centerX = 350; // Adjusted center X position
   const centerY = 250; // Adjusted center Y position for shorter height
@@ -49,6 +59,28 @@ const SkillCarousel: React.FC = () => {
       onMouseLeave={() => setIsHovered(false)}
       style={{ perspective: '1200px' }} // Increased perspective for better 3D effect
     >
+      {/* Left Navigation Button */}
+      <button
+        onClick={rotateLeft}
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full shadow-lg transition-colors duration-200"
+        aria-label="Rotate carousel left"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      {/* Right Navigation Button */}
+      <button
+        onClick={rotateRight}
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full shadow-lg transition-colors duration-200"
+        aria-label="Rotate carousel right"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
       <div
         className="relative"
         style={{
