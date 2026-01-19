@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { NextJsIcon } from './icons/NextJsIcon';
+import { TypeScriptIcon } from './icons/TypeScriptIcon';
+import { TailwindIcon } from './icons/TailwindIcon';
+import { FirebaseIcon } from './icons/FirebaseIcon';
+import { VercelIcon } from './icons/VercelIcon';
+import { WixIcon } from './icons/WixIcon';
+import { ReactIcon } from './icons/ReactIcon';
+import { ResponsiveIcon } from './icons/ResponsiveIcon';
 
 interface Project {
   name: string;
@@ -39,6 +47,20 @@ const projects: Project[] = [
     link: "https://jumpstarthost.wixsite.com/mysite"
   }
 ];
+
+const techIcons: { [key: string]: React.ComponentType<{ className?: string }> } = {
+  "Next.js": NextJsIcon,
+  "React": ReactIcon,
+  "TypeScript": TypeScriptIcon,
+  "Tailwind CSS": TailwindIcon,
+  "Firebase": FirebaseIcon,
+  "Vercel": VercelIcon,
+  "Wix Studio": WixIcon,
+  "Wix Website Builder": WixIcon,
+  "Wix Hosting": WixIcon,
+  "Responsive Design": ResponsiveIcon,
+  "localStorage": () => <span className="text-lg">💾</span>
+};
 
 const ProjectCarousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -90,17 +112,21 @@ const ProjectCarousel: React.FC = () => {
             }}
             className="p-8 pl-20 pr-20"
           >
-            <h3 className="text-2xl font-bold text-text-primary mb-4">{currentProject.name}</h3>
+            <h3 className="text-2xl font-bold text-text-primary mb-4 text-center">{currentProject.name}</h3>
             <p className="text-text-secondary mb-6">{currentProject.description}</p>
 
             <div className="mb-4">
               <h4 className="text-lg font-semibold text-text-primary mb-2">Tech Stack</h4>
-              <div className="flex flex-wrap gap-2">
-                {currentProject.techStack.map((tech, index) => (
-                  <span key={index} className="bg-primary/20 text-primary px-3 py-1 rounded-full text-sm">
-                    {tech}
-                  </span>
-                ))}
+              <div className="flex flex-wrap gap-2 justify-center">
+                {currentProject.techStack.map((tech, index) => {
+                  const IconComponent = techIcons[tech];
+                  return (
+                    <div key={index} className="flex items-center gap-2 bg-primary/20 text-primary px-3 py-1 rounded-full text-sm">
+                      {IconComponent && <IconComponent className="w-4 h-4" />}
+                      <span>{tech}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 

@@ -2,7 +2,7 @@ export const translations = {
   en: {
     hero: {
       greeting: "Hi, I'm",
-      role: "Self-taught Full-Stack Developer | Next.js, TypeScript & Modern Web Solutions",
+      role: "Full-Stack Web Developer & Wix Studio Designer",
       viewProjects: "View Projects",
       contactMe: "Contact Me"
     },
@@ -34,14 +34,7 @@ export const translations = {
     },
     about: {
       title: "About Me",
-      description: "Self-taught full-stack developer specializing in modern web technologies. I craft scalable solutions using Next.js, TypeScript, and cutting-edge frameworks. With expertise in both development and design, I deliver user-focused applications that balance performance, functionality, and aesthetic excellence. Available for freelance projects and remote collaboration.",
-      process: {
-        title: "My Process",
-        plan: "Understand requirements and plan the solution",
-        design: "Create wireframes and design the user interface",
-        develop: "Build the application with clean, efficient code",
-        deploy: "Test, optimize, and launch the final product"
-      }
+      description: "Self-taught full-stack developer specializing in modern web technologies. I craft scalable solutions using Next.js, TypeScript, and cutting-edge frameworks. With expertise in both development and design, I deliver user-focused applications that balance performance, functionality, and aesthetic excellence. Available for freelance projects and remote collaboration."
     },
     contact: {
       title: "Get In Touch",
@@ -91,14 +84,7 @@ export const translations = {
     },
     about: {
       title: "Tungkol sa Akin",
-      description: "Isa akong masigasig na web developer na may expertise sa full-stack development at Wix Studio design. Mahilig akong lutasin ang mga kumplikadong problema at lumikha ng intuitive user experiences. Ang aking approach ay pinagsasama ang technical expertise at creative thinking upang magbigay ng high-quality solutions.",
-      process: {
-        title: "Aking Proseso",
-        plan: "Unawain ang mga requirements at planuhin ang solution",
-        design: "Gumawa ng wireframes at design ang user interface",
-        develop: "Bumuo ng application gamit ang clean, efficient code",
-        deploy: "Subukan, optimize, at ilunsad ang final product"
-      }
+      description: "Isa akong masigasig na web developer na may expertise sa full-stack development at Wix Studio design. Mahilig akong lutasin ang mga kumplikadong problema at lumikha ng intuitive user experiences. Ang aking approach ay pinagsasama ang technical expertise at creative thinking upang magbigay ng high-quality solutions."
     },
     contact: {
       title: "Makipag-ugnayan",

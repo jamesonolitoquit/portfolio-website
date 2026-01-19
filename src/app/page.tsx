@@ -4,6 +4,7 @@ import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import ScrollProgress from '@/components/ScrollProgress'
+import SkillCarousel from '@/components/SkillCarousel'
 import ProjectCarousel from '@/components/ProjectCarousel'
 import { translations } from '@/lib/translations'
 
@@ -58,6 +59,21 @@ export default function Home() {
           </motion.div>
         </section>
 
+        {/* Skills */}
+        <section id="skills" className="py-20 px-4 bg-surface">
+          <div className="max-w-7xl mx-auto">
+            <motion.h2
+              className="text-3xl font-bold text-center mb-12"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              {t.skills.title}
+            </motion.h2>
+            <SkillCarousel />
+          </div>
+        </section>
+
         {/* Projects */}
         <section id="projects" className="py-20 px-4">
           <div className="max-w-7xl mx-auto">
@@ -70,102 +86,6 @@ export default function Home() {
               {t.projects.title}
             </motion.h2>
             <ProjectCarousel />
-          </div>
-        </section>
-
-        {/* Skills */}
-        <section id="skills" className="py-20 px-4 bg-surface">
-          <div className="max-w-7xl mx-auto">
-            <motion.h2
-              className="text-3xl font-bold text-center mb-12"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-            >
-              {t.skills.title}
-            </motion.h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <motion.div
-                className="text-center bg-background p-4 rounded-lg"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-              >
-                <div className="text-4xl mb-2">⚛️</div>
-                <p className="font-medium">Next.js</p>
-              </motion.div>
-              <motion.div
-                className="text-center bg-background p-4 rounded-lg"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-              >
-                <div className="text-4xl mb-2">⚡</div>
-                <p className="font-medium">TypeScript</p>
-              </motion.div>
-              <motion.div
-                className="text-center bg-background p-4 rounded-lg"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-              >
-                <div className="text-4xl mb-2">🎨</div>
-                <p className="font-medium">Tailwind CSS</p>
-              </motion.div>
-              <motion.div
-                className="text-center bg-background p-4 rounded-lg"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-              >
-                <div className="text-4xl mb-2">🔥</div>
-                <p className="font-medium">Firebase</p>
-              </motion.div>
-              <motion.div
-                className="text-center bg-background p-4 rounded-lg"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-              >
-                <div className="text-4xl mb-2">▲</div>
-                <p className="font-medium">Vercel</p>
-              </motion.div>
-              <motion.div
-                className="text-center bg-background p-4 rounded-lg"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.6 }}
-              >
-                <div className="text-4xl mb-2">🟫</div>
-                <p className="font-medium">Wix Studio</p>
-              </motion.div>
-              <motion.div
-                className="text-center bg-background p-4 rounded-lg"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.7 }}
-              >
-                <div className="text-4xl mb-2">🌐</div>
-                <p className="font-medium">React</p>
-              </motion.div>
-              <motion.div
-                className="text-center bg-background p-4 rounded-lg"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.8 }}
-              >
-                <div className="text-4xl mb-2">📱</div>
-                <p className="font-medium">Responsive Design</p>
-              </motion.div>
-            </div>
           </div>
         </section>
 
@@ -189,36 +109,6 @@ export default function Home() {
             >
               {t.about.description}
             </motion.p>
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-            >
-              <h3 className="text-2xl font-semibold mb-6">{t.about.process.title}</h3>
-              <div className="grid md:grid-cols-4 gap-6">
-                <div className="text-center">
-                  <div className="bg-primary text-background w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
-                  <h4 className="font-semibold mb-2">{t.about.process.plan.split(' ')[0]}</h4>
-                  <p className="text-sm text-text-secondary">{t.about.process.plan}</p>
-                </div>
-                <div className="text-center">
-                  <div className="bg-primary text-background w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
-                  <h4 className="font-semibold mb-2">{t.about.process.design.split(' ')[0]}</h4>
-                  <p className="text-sm text-text-secondary">{t.about.process.design}</p>
-                </div>
-                <div className="text-center">
-                  <div className="bg-primary text-background w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
-                  <h4 className="font-semibold mb-2">{t.about.process.develop.split(' ')[0]}</h4>
-                  <p className="text-sm text-text-secondary">{t.about.process.develop}</p>
-                </div>
-                <div className="text-center">
-                  <div className="bg-primary text-background w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">4</div>
-                  <h4 className="font-semibold mb-2">{t.about.process.deploy.split(' ')[0]}</h4>
-                  <p className="text-sm text-text-secondary">{t.about.process.deploy}</p>
-                </div>
-              </div>
-            </motion.div>
           </div>
         </section>
 
