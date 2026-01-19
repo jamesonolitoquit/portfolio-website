@@ -8,13 +8,13 @@ interface Skill {
 }
 
 const skills: Skill[] = [
-  { name: "Next.js", icon: "⚛️", description: "A React framework for production with server-side rendering and static site generation." },
-  { name: "TypeScript", icon: "⚡", description: "A typed superset of JavaScript that compiles to plain JavaScript." },
+  { name: "Next.js", icon: "🚀", description: "A React framework for production with server-side rendering and static site generation." },
+  { name: "TypeScript", icon: "💎", description: "A typed superset of JavaScript that compiles to plain JavaScript." },
   { name: "Tailwind CSS", icon: "🎨", description: "A utility-first CSS framework for rapid UI development." },
   { name: "Firebase", icon: "🔥", description: "A platform for building web and mobile applications with backend services." },
   { name: "Vercel", icon: "▲", description: "A platform for frontend frameworks and static sites with serverless functions." },
   { name: "Wix Studio", icon: "🟫", description: "A visual development platform for creating websites and web applications." },
-  { name: "React", icon: "🌐", description: "A JavaScript library for building user interfaces." },
+  { name: "React", icon: "⚛️", description: "A JavaScript library for building user interfaces." },
   { name: "Responsive Design", icon: "📱", description: "Designing websites that work on all device sizes." },
   { name: "PostgreSQL", icon: "🐘", description: "An advanced open-source relational database." },
   { name: "MySQL", icon: "🗄️", description: "An open-source relational database management system." },
