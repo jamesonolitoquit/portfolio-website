@@ -46,7 +46,10 @@ const SkillCarousel: React.FC = () => {
       className="relative w-full flex justify-center items-center overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{ perspective: '1200px' }} // Increased perspective for better 3D effect
+      style={{ 
+        perspective: '1200px',
+        minHeight: '600px' // Ensure enough height for tooltip below carousel
+      }} // Increased perspective for better 3D effect
     >
       <div
         className="relative"
