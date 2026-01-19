@@ -42,7 +42,7 @@ const projects: Project[] = [
   {
     name: "Wix Business Website",
     description: "A Wix-based business site for showcasing services and contact information.",
-    techStack: ["Wix Website Builder", "Wix Hosting"],
+    techStack: ["Wix Studio", "Wix Hosting"],
     features: ["Drag-and-drop design", "Customizable templates", "Integrated contact forms", "Mobile-friendly"],
     link: "https://jumpstarthost.wixsite.com/mysite"
   }
@@ -139,17 +139,19 @@ const ProjectCarousel: React.FC = () => {
               </ul>
             </div>
 
-            <a
-              href={currentProject.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-background px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 border-2 border-primary/50"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-              View Live Website
-            </a>
+            <div className="flex justify-center">
+              <a
+                href={currentProject.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-background px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 border-2 border-primary/50"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                View Live Website
+              </a>
+            </div>
           </motion.div>
         </AnimatePresence>
       </div>

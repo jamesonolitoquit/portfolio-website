@@ -69,11 +69,11 @@ const SkillCarousel: React.FC = () => {
 
   return (
     <div
-      className="relative w-full max-w-md mx-auto"
+      className="relative w-full max-w-4xl mx-auto"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative overflow-hidden rounded-lg bg-surface border border-primary/20 p-8">
+      <div className="relative overflow-hidden rounded-lg bg-surface p-8">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={currentIndex}
