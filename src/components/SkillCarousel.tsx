@@ -39,7 +39,7 @@ const SkillCarousel: React.FC = () => {
 
   const radius = 300; // Increased radius for larger carousel
   const centerX = 350; // Adjusted center X position
-  const centerY = 350; // Adjusted center Y position
+  const centerY = 250; // Adjusted center Y position for shorter height
 
   return (
     <div
@@ -52,7 +52,7 @@ const SkillCarousel: React.FC = () => {
         className="relative"
         style={{
           width: 700,
-          height: 700,
+          height: 500,
           transformStyle: 'preserve-3d'
         }}
       >
@@ -104,26 +104,25 @@ const SkillCarousel: React.FC = () => {
             </motion.div>
           );
         })}
-        
-        {/* Tooltip */}
-        {hoveredSkill && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            className="absolute bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg pointer-events-none z-50 max-w-xs text-center"
-            style={{
-              left: '50%',
-              top: '50%',
-              transform: 'translate(-50%, -50%)',
-              marginTop: '-100px' // Position above the center
-            }}
-          >
-            <div className="font-semibold text-lg mb-1">{hoveredSkill.name}</div>
-            <div className="text-sm">{hoveredSkill.description}</div>
-          </motion.div>
-        )}
       </div>
+      
+      {/* Tooltip positioned below the carousel */}
+      {hoveredSkill && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          className="absolute bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg pointer-events-none z-50 max-w-xs text-center"
+          style={{
+            top: '520px', // Position below the 500px carousel with some margin
+            left: '50%',
+            transform: 'translateX(-50%)'
+          }}
+        >
+          <div className="font-semibold text-lg mb-1">{hoveredSkill.name}</div>
+          <div className="text-sm">{hoveredSkill.description}</div>
+        </motion.div>
+      )}
     </div>
   );
 };
