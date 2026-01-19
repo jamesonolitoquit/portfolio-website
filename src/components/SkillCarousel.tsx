@@ -35,9 +35,9 @@ const SkillCarousel: React.FC = () => {
     return () => clearInterval(interval);
   }, [isHovered]);
 
-  const radius = 180; // Slightly smaller radius to prevent overlap
-  const centerX = 250; // Adjusted center
-  const centerY = 180; // Adjusted center
+  const radius = 220; // Increased radius for better spacing between icons
+  const centerX = 250; // Center X position
+  const centerY = 250; // Center Y position
 
   return (
     <div
@@ -49,8 +49,8 @@ const SkillCarousel: React.FC = () => {
       <div
         className="relative"
         style={{
-          width: 500,
-          height: 360,
+          width: 550,
+          height: 550,
           transformStyle: 'preserve-3d'
         }}
       >
