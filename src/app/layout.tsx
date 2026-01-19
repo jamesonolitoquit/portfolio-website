@@ -10,6 +10,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Jameson Olitoquit - Web Developer",
   description: "Portfolio of Jameson A. Olitoquit - Web Developer, Full Stack Developer, and Wix Studio Designer",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

@@ -1,6 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Website - Jameson Olitoquit
 
-## Getting Started
+A modern, responsive portfolio website built with Next.js 14, TypeScript, and Tailwind CSS.
+
+## 🚀 Deployment on Vercel
+
+### Quick Deploy
+1. **Push to GitHub**: Ensure your code is pushed to a GitHub repository
+2. **Import to Vercel**: Go to [vercel.com/import](https://vercel.com/import) and import your repository
+3. **Auto-Deploy**: Vercel will automatically detect Next.js and deploy your site
+
+### Manual Setup
+If you prefer manual setup:
+
+1. **Install Vercel CLI**:
+   ```bash
+   npm i -g vercel
+   ```
+
+2. **Deploy**:
+   ```bash
+   vercel
+   ```
+
+3. **Follow the prompts** to configure your deployment
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Theme**: next-themes (Dark/Light mode)
+
+## 📁 Project Structure
+
+```
+portfolioWebsite/
+├── src/
+│   ├── app/           # Next.js App Router pages
+│   ├── components/    # Reusable React components
+│   └── lib/          # Utility functions
+├── public/           # Static assets
+└── vercel.json      # Vercel deployment config
+```
+
+## 🏃‍♂️ Local Development
 
 First, run the development server:
 
@@ -10,13 +55,30 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Build for Production
+
+```bash
+npm run build
+```
+
+## 🔧 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+
+## 🌐 Live Demo
+
+[View Live Site](https://your-vercel-url.vercel.app) (Replace with your actual Vercel URL)
+
+---
+
+**Portfolio of Jameson A. Olitoquit** - Web Developer, Full Stack Developer, and Wix Studio Designer
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
