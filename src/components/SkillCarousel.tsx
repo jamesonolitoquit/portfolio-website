@@ -29,28 +29,28 @@ const SkillCarousel: React.FC = () => {
     if (isHovered) return;
 
     const interval = setInterval(() => {
-      setRotation((prev) => prev + 0.5); // Slower, smoother rotation
-    }, 50);
+      setRotation((prev) => prev + 0.3); // Even slower for better visibility
+    }, 60);
 
     return () => clearInterval(interval);
   }, [isHovered]);
 
-  const radius = 200; // Distance from center in 3D space
-  const centerX = 200; // Center X position
-  const centerY = 150; // Center Y position
+  const radius = 180; // Slightly smaller radius to prevent overlap
+  const centerX = 250; // Adjusted center
+  const centerY = 180; // Adjusted center
 
   return (
     <div
       className="relative w-full flex justify-center items-center overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{ perspective: '1000px' }} // Enable 3D perspective
+      style={{ perspective: '1200px' }} // Increased perspective for better 3D effect
     >
       <div
         className="relative"
         style={{
-          width: 400,
-          height: 300,
+          width: 500,
+          height: 360,
           transformStyle: 'preserve-3d'
         }}
       >
@@ -61,35 +61,42 @@ const SkillCarousel: React.FC = () => {
           const z = Math.cos(angle) * radius;
 
           // Calculate opacity and z-index based on position
-          const distanceFromCenter = Math.abs(angle % (2 * Math.PI) - Math.PI);
-          const normalizedDistance = distanceFromCenter / Math.PI;
-          const opacity = Math.max(0.1, 1 - normalizedDistance * 0.8);
-          const zIndex = Math.floor(100 - normalizedDistance * 70);
+          const distanceFromCenter = Math.min(
+            Math.abs(angle % (2 * Math.PI)),
+            Math.abs((angle % (2 * Math.PI)) - 2 * Math.PI)
+          );
+          const normalizedDistance = Math.min(distanceFromCenter / Math.PI, 1);
+          const opacity = Math.max(0.15, 1 - normalizedDistance * 0.85);
+          const zIndex = Math.floor(100 - normalizedDistance * 80);
 
           return (
             <motion.div
               key={skill.name}
-              className="absolute text-5xl cursor-pointer select-none"
+              className="absolute flex flex-col items-center justify-center cursor-pointer select-none"
               style={{
-                left: centerX - 25, // Center the icon
-                top: centerY - 25,  // Center the icon
-                transform: `translateX(${x}px) translateY(0px) translateZ(${z}px) rotateY(${-angle}rad)`,
+                left: centerX + x - 40, // Center the entire skill item
+                top: centerY - 40,     // Center the entire skill item
+                transform: `translateZ(${z}px)`,
                 zIndex: zIndex,
                 opacity: opacity,
               }}
               whileHover={{
-                scale: 1.3,
+                scale: 1.2,
                 zIndex: 200,
                 opacity: 1,
               }}
               transition={{
                 type: "spring",
                 stiffness: 300,
-                damping: 20
+                damping: 25
               }}
-              title={skill.name} // Tooltip on hover
             >
-              {skill.icon}
+              {/* Icon */}
+              <div className="text-4xl mb-1">{skill.icon}</div>
+              {/* Skill name */}
+              <div className="text-xs font-medium text-center leading-tight max-w-20 truncate">
+                {skill.name}
+              </div>
             </motion.div>
           );
         })}
@@ -98,7 +105,7 @@ const SkillCarousel: React.FC = () => {
       {/* Center content */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="text-center">
-          <h3 className="text-xl font-semibold text-primary mb-2">Skills</h3>
+          <h3 className="text-xl font-semibold text-primary mb-2">Technical Skills</h3>
           <p className="text-sm text-text-secondary">Hover to pause • 3D carousel view</p>
         </div>
       </div>
