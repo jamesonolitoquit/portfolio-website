@@ -101,14 +101,6 @@ const SkillCarousel: React.FC = () => {
           );
         })}
       </div>
-
-      {/* Center content */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-50">
-        <div className="text-center bg-background/80 backdrop-blur-sm rounded-lg px-4 py-2 border border-primary/20">
-          <h3 className="text-xl font-semibold text-primary mb-2">Technical Skills</h3>
-          <p className="text-sm text-text-secondary">Hover to pause • 3D carousel view</p>
-        </div>
-      </div>
     </div>
   );
 };
