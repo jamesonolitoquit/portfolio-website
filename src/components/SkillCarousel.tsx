@@ -66,7 +66,7 @@ const SkillCarousel: React.FC = () => {
             Math.abs((angle % (2 * Math.PI)) - 2 * Math.PI)
           );
           const normalizedDistance = Math.min(distanceFromCenter / Math.PI, 1);
-          const opacity = Math.max(0.15, 1 - normalizedDistance * 0.85);
+          const opacity = Math.max(0.05, 1 - normalizedDistance * 0.95); // More pronounced opacity fade
           const zIndex = Math.floor(100 - normalizedDistance * 80);
 
           return (
@@ -92,9 +92,9 @@ const SkillCarousel: React.FC = () => {
               }}
             >
               {/* Icon */}
-              <div className="text-4xl mb-1">{skill.icon}</div>
+              <div className="text-6xl mb-2">{skill.icon}</div>
               {/* Skill name */}
-              <div className="text-xs font-medium text-center leading-tight max-w-20 truncate">
+              <div className="text-sm font-medium text-center leading-tight max-w-24 truncate">
                 {skill.name}
               </div>
             </motion.div>
@@ -103,8 +103,8 @@ const SkillCarousel: React.FC = () => {
       </div>
 
       {/* Center content */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="text-center">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-50">
+        <div className="text-center bg-background/80 backdrop-blur-sm rounded-lg px-4 py-2 border border-primary/20">
           <h3 className="text-xl font-semibold text-primary mb-2">Technical Skills</h3>
           <p className="text-sm text-text-secondary">Hover to pause • 3D carousel view</p>
         </div>
