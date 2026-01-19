@@ -42,30 +42,50 @@ const projects: Project[] = [
 
 const ProjectCarousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0); // 1 for right, -1 for left
 
   const nextProject = () => {
+    setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % projects.length);
   };
 
   const prevProject = () => {
+    setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
   };
 
   const currentProject = projects[currentIndex];
 
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 300 : -300,
+      opacity: 0,
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 300 : -300,
+      opacity: 0,
+    }),
+  };
+
   return (
     <div className="relative w-full max-w-4xl mx-auto">
       <div className="overflow-hidden rounded-lg shadow-lg bg-surface border border-primary/20">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={currentIndex}
-            initial={{ opacity: 0, x: 300 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -300 }}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
             transition={{
-              type: "spring",
-              stiffness: 300,
-              damping: 30,
+              x: { type: "spring", stiffness: 300, damping: 30 },
               opacity: { duration: 0.2 }
             }}
             className="p-8 pl-20 pr-20"
