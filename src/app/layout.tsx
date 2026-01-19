@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { AnimatedBackground } from "@/components/AnimatedBackground";
 import "./globals.css";
 
 const inter = Inter({
@@ -24,6 +25,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased bg-background text-text-primary`} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="dark">
+          <AnimatedBackground />
           {children}
         </ThemeProvider>
       </body>
