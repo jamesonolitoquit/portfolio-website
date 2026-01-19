@@ -50,7 +50,7 @@ const SkillCarousel: React.FC = () => {
 
   const radius = 300; // Increased radius for larger carousel
   const centerX = 350; // Adjusted center X position
-  const centerY = 250; // Adjusted center Y position for shorter height
+  const centerY = 150; // Adjusted center Y position for shorter height
 
   return (
     <div
@@ -85,7 +85,7 @@ const SkillCarousel: React.FC = () => {
         className="relative"
         style={{
           width: 700,
-          height: 500,
+          height: 300,
           transformStyle: 'preserve-3d'
         }}
       >

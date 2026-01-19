@@ -26,8 +26,8 @@ export default function Navbar({ language, setLanguage, translations }: NavbarPr
           <div className="text-xl font-bold">J.A.O.&apos;s Portfolio</div>
           <div className="hidden md:flex space-x-8">
             <a href={getNavLink('hero')} className="hover:text-primary transition-colors">{translations.nav.home}</a>
-            <a href={getNavLink('projects')} className="hover:text-primary transition-colors">{translations.nav.projects}</a>
             <a href={getNavLink('skills')} className="hover:text-primary transition-colors">{translations.nav.skills}</a>
+            <a href={getNavLink('projects')} className="hover:text-primary transition-colors">{translations.nav.projects}</a>
             <a href={getNavLink('about')} className="hover:text-primary transition-colors">{translations.nav.about}</a>
             <a href={getNavLink('contact')} className="hover:text-primary transition-colors">{translations.nav.contact}</a>
             <a href="/cv" className="hover:text-primary transition-colors">{translations.nav.cv}</a>
