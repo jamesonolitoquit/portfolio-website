@@ -15,21 +15,21 @@ const projects: Project[] = [
     description: "A modern business website template for small businesses or startups, featuring sections for services, about, contact, and support.",
     techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Firebase", "Vercel"],
     features: ["Authentication", "Profile/Settings pages", "Support center", "Responsive design"],
-    link: "https://business-website-sample.vercel.app"
+    link: "https://jao-business-website-sample.vercel.app/"
   },
   {
     name: "Landing Page Website Sample",
     description: "A high-conversion landing page template for SaaS or product launches, with sections for features, pricing, testimonials, and demo signup.",
     techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
     features: ["Modular components", "Email signup", "Demo banner", "Responsive and accessible design"],
-    link: "https://landingpage-website-sample.vercel.app"
+    link: "https://jao-landingpage-website-sample.vercel.app/"
   },
   {
     name: "Web Application Sample",
     description: "A sample web application demonstrating client-side logic and state management, such as an Expense Tracker.",
     techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "localStorage", "Vercel"],
     features: ["Add/delete/edit expenses", "Persistent state", "Summary calculations", "Modern UI", "Offline-capable"],
-    link: "https://web-application-sample.vercel.app"
+    link: "https://jao-web-application-sample.vercel.app/"
   },
   {
     name: "Wix Business Website",
