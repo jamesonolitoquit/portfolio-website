@@ -118,7 +118,7 @@ const ProjectCarousel: React.FC = () => {
             className="p-8 pl-20 pr-20"
           >
             <div className="mb-6">
-              <div className="relative w-full h-48 bg-gray-100 rounded-lg overflow-hidden border border-primary/20">
+              <div className="relative w-full h-64 bg-gray-100 rounded-lg overflow-hidden border border-primary/20">
                 <iframe
                   src={currentProject.link}
                   className="w-full h-full"
@@ -157,15 +157,6 @@ const ProjectCarousel: React.FC = () => {
                   );
                 })}
               </div>
-            </div>
-
-            <div className="mb-6">
-              <h4 className="text-lg font-semibold text-text-primary mb-2">Key Features</h4>
-              <ul className="list-disc list-inside text-text-secondary space-y-1">
-                {currentProject.features.map((feature, index) => (
-                  <li key={index}>{feature}</li>
-                ))}
-              </ul>
             </div>
 
             <div className="flex justify-center">
