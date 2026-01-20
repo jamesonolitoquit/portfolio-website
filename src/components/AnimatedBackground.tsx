@@ -73,41 +73,49 @@ export function AnimatedBackground() {
 
           {/* Sun rays - longer and more detailed */}
           {!isDark && (
-            <>
+            <motion.g
+              animate={{ rotate: 360 }}
+              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+              style={{ transformOrigin: "70px 70px" }}
+            >
               {/* Main rays */}
               {[...Array(12)].map((_, i) => (
-                <motion.line
+                <g
                   key={`ray-${i}`}
-                  x1="70"
-                  y1="25"
-                  x2="70"
-                  y2="15"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  animate={{ rotate: i * 30 }}
-                  transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                  opacity="0.9"
-                />
+                  transform={`rotate(${i * 30}, 70, 70)`}
+                >
+                  <line
+                    x1="70"
+                    y1="25"
+                    x2="70"
+                    y2="15"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    opacity="0.9"
+                  />
+                </g>
               ))}
 
               {/* Secondary rays */}
               {[...Array(12)].map((_, i) => (
-                <motion.line
+                <g
                   key={`small-ray-${i}`}
-                  x1="70"
-                  y1="30"
-                  x2="70"
-                  y2="20"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  animate={{ rotate: i * 30 + 15 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear", delay: 0.5 }}
-                  opacity="0.7"
-                />
+                  transform={`rotate(${i * 30 + 15}, 70, 70)`}
+                >
+                  <line
+                    x1="70"
+                    y1="30"
+                    x2="70"
+                    y2="20"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    opacity="0.7"
+                  />
+                </g>
               ))}
-            </>
+            </motion.g>
           )}
 
           {isDark && (
