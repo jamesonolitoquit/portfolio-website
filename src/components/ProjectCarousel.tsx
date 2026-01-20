@@ -102,6 +102,27 @@ const ProjectCarousel: React.FC = () => {
 
   return (
     <div className="relative w-full max-w-4xl mx-auto">
+      {/* Navigation Buttons - Outside carousel divider */}
+      <button
+        onClick={prevProject}
+        className="absolute left-[-47px] top-1/2 transform -translate-y-1/2 z-30 bg-surface border border-primary/20 shadow-lg rounded-full p-2 hover:bg-surface/80 transition-colors"
+        aria-label="Previous project"
+      >
+        <svg className="w-6 h-6 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <button
+        onClick={nextProject}
+        className="absolute right-[-47px] top-1/2 transform -translate-y-1/2 z-30 bg-surface border border-primary/20 shadow-lg rounded-full p-2 hover:bg-surface/80 transition-colors"
+        aria-label="Next project"
+      >
+        <svg className="w-6 h-6 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
       <div className="overflow-hidden rounded-lg shadow-lg bg-surface border border-primary/20">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
@@ -119,7 +140,7 @@ const ProjectCarousel: React.FC = () => {
           >
             {/* Website Preview - Left Side */}
             <div className="w-full md:w-1/2">
-              <div className="relative w-full h-64 md:h-80 bg-gray-100 rounded-lg overflow-hidden">
+              <div className="relative w-full h-[520px] md:h-[584px] bg-gray-100 rounded-lg overflow-hidden">
                 <iframe
                   src={currentProject.link}
                   className="w-full h-full"
@@ -144,9 +165,9 @@ const ProjectCarousel: React.FC = () => {
             </div>
 
             {/* Project Details - Right Side */}
-            <div className="w-full md:w-1/2 flex flex-col">
-              {/* View Live Website Button - At Top */}
-              <div className="mb-6">
+            <div className="w-full md:w-1/2 flex flex-col justify-center">
+              {/* View Live Website Button - Centered */}
+              <div className="mb-6 flex justify-center">
                 <a
                   href={currentProject.link}
                   target="_blank"
@@ -185,27 +206,6 @@ const ProjectCarousel: React.FC = () => {
           </motion.div>
         </AnimatePresence>
       </div>
-
-      {/* Navigation Buttons */}
-      <button
-        onClick={prevProject}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-surface border border-primary/20 shadow-lg rounded-full p-2 hover:bg-surface/80 transition-colors"
-        aria-label="Previous project"
-      >
-        <svg className="w-6 h-6 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-
-      <button
-        onClick={nextProject}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-surface border border-primary/20 shadow-lg rounded-full p-2 hover:bg-surface/80 transition-colors"
-        aria-label="Next project"
-      >
-        <svg className="w-6 h-6 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
 
       {/* Dots Indicator */}
       <div className="flex justify-center mt-4 space-x-2">

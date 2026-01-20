@@ -50,43 +50,74 @@ export function AnimatedBackground() {
         transition={{ duration: animationDuration, ease: "easeInOut" }}
       >
         <svg
-          width="120"
-          height="120"
-          viewBox="0 0 120 120"
-          className={`drop-shadow-lg ${isDark ? "text-yellow-200" : "text-yellow-400"}`}
+          width="140"
+          height="140"
+          viewBox="0 0 140 140"
+          className={`drop-shadow-xl ${isDark ? "text-yellow-200" : "text-yellow-500"}`}
         >
+          {/* Sun body with gradient */}
+          <defs>
+            <radialGradient id="sunGradient" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="70%" stopColor="currentColor" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.6" />
+            </radialGradient>
+          </defs>
           <circle
-            cx="60"
-            cy="60"
-            r="40"
-            fill="currentColor"
+            cx="70"
+            cy="70"
+            r="35"
+            fill="url(#sunGradient)"
             className={isDark ? "animate-pulse" : ""}
           />
+
+          {/* Sun rays - longer and more detailed */}
           {!isDark && (
             <>
-              {/* Sun rays */}
-              {[...Array(8)].map((_, i) => (
+              {/* Main rays */}
+              {[...Array(12)].map((_, i) => (
                 <motion.line
-                  key={i}
-                  x1="60"
-                  y1="20"
-                  x2="60"
-                  y2="10"
+                  key={`ray-${i}`}
+                  x1="70"
+                  y1="25"
+                  x2="70"
+                  y2="15"
                   stroke="currentColor"
-                  strokeWidth="3"
+                  strokeWidth="4"
                   strokeLinecap="round"
-                  animate={{ rotate: i * 45 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  animate={{ rotate: i * 30 }}
+                  transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                  opacity="0.9"
+                />
+              ))}
+
+              {/* Secondary rays */}
+              {[...Array(12)].map((_, i) => (
+                <motion.line
+                  key={`small-ray-${i}`}
+                  x1="70"
+                  y1="30"
+                  x2="70"
+                  y2="20"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  animate={{ rotate: i * 30 + 15 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear", delay: 0.5 }}
+                  opacity="0.7"
                 />
               ))}
             </>
           )}
+
           {isDark && (
             <>
-              {/* Moon craters */}
-              <circle cx="45" cy="50" r="3" fill="#e6e6e6" opacity="0.6" />
-              <circle cx="70" cy="45" r="2" fill="#e6e6e6" opacity="0.4" />
-              <circle cx="55" cy="70" r="2.5" fill="#e6e6e6" opacity="0.5" />
+              {/* Moon craters - more detailed */}
+              <ellipse cx="50" cy="55" rx="4" ry="3" fill="#e6e6e6" opacity="0.7" />
+              <ellipse cx="75" cy="50" rx="3" ry="2.5" fill="#e6e6e6" opacity="0.5" />
+              <ellipse cx="60" cy="75" rx="3.5" ry="2.5" fill="#e6e6e6" opacity="0.6" />
+              <ellipse cx="85" cy="70" rx="2.5" ry="2" fill="#e6e6e6" opacity="0.4" />
+              <ellipse cx="45" cy="70" rx="2" ry="1.5" fill="#e6e6e6" opacity="0.5" />
             </>
           )}
         </svg>

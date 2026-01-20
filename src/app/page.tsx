@@ -75,7 +75,7 @@ export default function Home() {
         </section>
 
         {/* Projects */}
-        <section id="projects" className="py-20 px-4">
+        <section id="projects" className="py-32 px-4">
           <div className="max-w-7xl mx-auto">
             <motion.h2
               className="text-3xl font-bold text-center mb-12"
