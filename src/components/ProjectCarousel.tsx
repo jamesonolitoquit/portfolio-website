@@ -118,11 +118,28 @@ const ProjectCarousel: React.FC = () => {
             className="p-8 pl-20 pr-20"
           >
             <div className="mb-6">
-              <img
-                src={currentProject.screenshot}
-                alt={`${currentProject.name} preview`}
-                className="w-full h-48 object-cover rounded-lg shadow-md border border-primary/20"
-              />
+              <div className="relative w-full h-48 bg-gray-100 rounded-lg overflow-hidden border border-primary/20">
+                <iframe
+                  src={currentProject.link}
+                  className="w-full h-full"
+                  title={`${currentProject.name} live preview`}
+                  loading="lazy"
+                  onError={(e) => {
+                    // Fallback to static image if iframe fails
+                    const iframe = e.target as HTMLIFrameElement;
+                    const container = iframe.parentElement;
+                    if (container) {
+                      container.innerHTML = `
+                        <img
+                          src="${currentProject.screenshot}"
+                          alt="${currentProject.name} preview"
+                          class="w-full h-full object-cover rounded-lg"
+                        />
+                      `;
+                    }
+                  }}
+                />
+              </div>
             </div>
             <h3 className="text-2xl font-bold text-text-primary mb-4 text-center">{currentProject.name}</h3>
             <p className="text-text-secondary mb-6">{currentProject.description}</p>
