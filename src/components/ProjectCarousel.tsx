@@ -15,6 +15,7 @@ interface Project {
   techStack: string[];
   features: string[];
   link: string;
+  screenshot: string;
 }
 
 const projects: Project[] = [
@@ -23,28 +24,32 @@ const projects: Project[] = [
     description: "A modern business website template for small businesses or startups, featuring sections for services, about, contact, and support.",
     techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Firebase", "Vercel"],
     features: ["Authentication", "Profile/Settings pages", "Support center", "Responsive design"],
-    link: "https://jao-business-website-sample.vercel.app/"
+    link: "https://jao-business-website-sample.vercel.app/",
+    screenshot: "https://via.placeholder.com/600x300/6366f1/ffffff?text=Business+Website+Sample"
   },
   {
     name: "Landing Page Website Sample",
     description: "A high-conversion landing page template for SaaS or product launches, with sections for features, pricing, testimonials, and demo signup.",
     techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
     features: ["Modular components", "Email signup", "Demo banner", "Responsive and accessible design"],
-    link: "https://jao-landingpage-website-sample.vercel.app/"
+    link: "https://jao-landingpage-website-sample.vercel.app/",
+    screenshot: "https://via.placeholder.com/600x300/10b981/ffffff?text=Landing+Page+Sample"
   },
   {
     name: "Web Application Sample",
     description: "A sample web application demonstrating client-side logic and state management, such as an Expense Tracker.",
     techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "localStorage", "Vercel"],
     features: ["Add/delete/edit expenses", "Persistent state", "Summary calculations", "Modern UI", "Offline-capable"],
-    link: "https://jao-web-application-sample.vercel.app/"
+    link: "https://jao-web-application-sample.vercel.app/",
+    screenshot: "https://via.placeholder.com/600x300/f59e0b/ffffff?text=Web+Application+Sample"
   },
   {
     name: "Wix Business Website",
     description: "A Wix-based business site for showcasing services and contact information.",
     techStack: ["Wix Studio", "Wix Hosting"],
-    features: ["Drag-and-drop design", "Customizable templates", "Integrated contact forms", "Mobile-friendly"],
-    link: "https://jumpstarthost.wixsite.com/mysite"
+    features: ["Responsive", "Wix Studio created website", "Integrated contact forms", "Mobile-friendly"],
+    link: "https://jumpstarthost.wixsite.com/mysite",
+    screenshot: "https://via.placeholder.com/600x300/8b5cf6/ffffff?text=Wix+Business+Website"
   }
 ];
 
@@ -112,6 +117,13 @@ const ProjectCarousel: React.FC = () => {
             }}
             className="p-8 pl-20 pr-20"
           >
+            <div className="mb-6">
+              <img
+                src={currentProject.screenshot}
+                alt={`${currentProject.name} preview`}
+                className="w-full h-48 object-cover rounded-lg shadow-md border border-primary/20"
+              />
+            </div>
             <h3 className="text-2xl font-bold text-text-primary mb-4 text-center">{currentProject.name}</h3>
             <p className="text-text-secondary mb-6">{currentProject.description}</p>
 
