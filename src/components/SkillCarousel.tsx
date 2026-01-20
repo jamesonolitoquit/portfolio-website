@@ -58,7 +58,7 @@ const SkillCarousel: React.FC = () => {
         className="relative w-full flex justify-center items-center overflow-hidden"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        style={{ perspective: '1200px' }} // Increased perspective for better 3D effect
+        style={{ perspective: '1200px', height: 400 }} // Increased perspective for better 3D effect
       >
         {/* Left Navigation Button */}
         <button
@@ -67,7 +67,7 @@ const SkillCarousel: React.FC = () => {
           aria-label="Rotate carousel left"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
 
@@ -78,7 +78,7 @@ const SkillCarousel: React.FC = () => {
           aria-label="Rotate carousel right"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
           </svg>
         </button>
 
@@ -134,6 +134,7 @@ const SkillCarousel: React.FC = () => {
                   setHoveredSkill(null);
                   setTooltipPosition(null);
                 }}
+                suppressHydrationWarning
               >
                 {/* Icon */}
                 <div className="text-7xl mb-2">{skill.icon}</div>
@@ -159,6 +160,7 @@ const SkillCarousel: React.FC = () => {
             top: tooltipPosition.y,
             transform: 'translateX(-50%)'
           }}
+          suppressHydrationWarning
         >
           <div className="font-semibold text-lg mb-1">{hoveredSkill.name}</div>
           <div className="text-sm">{hoveredSkill.description}</div>
