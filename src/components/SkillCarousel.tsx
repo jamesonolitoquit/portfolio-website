@@ -50,99 +50,101 @@ const SkillCarousel: React.FC = () => {
 
   const radius = 300; // Increased radius for larger carousel
   const centerX = 350; // Adjusted center X position
-  const centerY = 150; // Adjusted center Y position for shorter height
+  const centerY = 200; // Adjusted center Y position for taller height
 
   return (
-    <div
-      className="relative w-full flex justify-center items-center overflow-hidden"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{ perspective: '1200px' }} // Increased perspective for better 3D effect
-    >
-      {/* Left Navigation Button */}
-      <button
-        onClick={rotateLeft}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full shadow-lg transition-colors duration-200"
-        aria-label="Rotate carousel left"
-      >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-
-      {/* Right Navigation Button */}
-      <button
-        onClick={rotateRight}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full shadow-lg transition-colors duration-200"
-        aria-label="Rotate carousel right"
-      >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
+    <div className="relative w-full flex justify-center items-center">
       <div
-        className="relative"
-        style={{
-          width: 700,
-          height: 300,
-          transformStyle: 'preserve-3d'
-        }}
+        className="relative w-full flex justify-center items-center overflow-hidden"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{ perspective: '1200px' }} // Increased perspective for better 3D effect
       >
-        {/* Skills positioned in 3D carousel */}
-        {skills.map((skill, index) => {
-          const angle = (index / skills.length) * 2 * Math.PI + (rotation * Math.PI) / 180;
-          const x = Math.sin(angle) * radius;
-          const z = Math.cos(angle) * radius;
+        {/* Left Navigation Button */}
+        <button
+          onClick={rotateLeft}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full shadow-lg transition-colors duration-200"
+          aria-label="Rotate carousel left"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
 
-          // Calculate opacity and z-index based on position
-          const distanceFromCenter = Math.min(
-            Math.abs(angle % (2 * Math.PI)),
-            Math.abs((angle % (2 * Math.PI)) - 2 * Math.PI)
-          );
-          const normalizedDistance = Math.min(distanceFromCenter / Math.PI, 1);
-          const opacity = Math.max(0.05, 1 - normalizedDistance * 0.95); // More pronounced opacity fade
-          const zIndex = Math.floor(100 - normalizedDistance * 80);
+        {/* Right Navigation Button */}
+        <button
+          onClick={rotateRight}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full shadow-lg transition-colors duration-200"
+          aria-label="Rotate carousel right"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
 
-          return (
-            <motion.div
-              key={skill.name}
-              className="absolute flex flex-col items-center justify-center cursor-pointer select-none"
-              style={{
-                left: centerX + x - 40, // Center the entire skill item
-                top: centerY - 40,     // Center the entire skill item
-                transform: `translateZ(${z}px)`,
-                zIndex: zIndex,
-                opacity: opacity,
-              }}
-              whileHover={{
-                scale: 1.2,
-                zIndex: 200,
-                opacity: 1,
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 25
-              }}
-              onMouseEnter={() => {
-                setHoveredSkill(skill);
-                setTooltipPosition({ x: centerX + x, y: centerY + 80 });
-              }}
-              onMouseLeave={() => {
-                setHoveredSkill(null);
-                setTooltipPosition(null);
-              }}
-            >
-              {/* Icon */}
-              <div className="text-7xl mb-2">{skill.icon}</div>
-              {/* Skill name */}
-              <div className="text-sm font-medium text-center leading-tight max-w-24 truncate">
-                {skill.name}
-              </div>
-            </motion.div>
-          );
-        })}
+        <div
+          className="relative"
+          style={{
+            width: 700,
+            height: 400,
+            transformStyle: 'preserve-3d'
+          }}
+        >
+          {/* Skills positioned in 3D carousel */}
+          {skills.map((skill, index) => {
+            const angle = (index / skills.length) * 2 * Math.PI + (rotation * Math.PI) / 180;
+            const x = Math.sin(angle) * radius;
+            const z = Math.cos(angle) * radius;
+
+            // Calculate opacity and z-index based on position
+            const distanceFromCenter = Math.min(
+              Math.abs(angle % (2 * Math.PI)),
+              Math.abs((angle % (2 * Math.PI)) - 2 * Math.PI)
+            );
+            const normalizedDistance = Math.min(distanceFromCenter / Math.PI, 1);
+            const opacity = Math.max(0.05, 1 - normalizedDistance * 0.95); // More pronounced opacity fade
+            const zIndex = Math.floor(100 - normalizedDistance * 80);
+
+            return (
+              <motion.div
+                key={skill.name}
+                className="absolute flex flex-col items-center justify-center cursor-pointer select-none"
+                style={{
+                  left: centerX + x - 40, // Center the entire skill item
+                  top: centerY - 40,     // Center the entire skill item
+                  transform: `translateZ(${z}px)`,
+                  zIndex: zIndex,
+                  opacity: opacity,
+                }}
+                whileHover={{
+                  scale: 1.2,
+                  zIndex: 200,
+                  opacity: 1,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 25
+                }}
+                onMouseEnter={() => {
+                  setHoveredSkill(skill);
+                  setTooltipPosition({ x: centerX + x, y: centerY + 80 });
+                }}
+                onMouseLeave={() => {
+                  setHoveredSkill(null);
+                  setTooltipPosition(null);
+                }}
+              >
+                {/* Icon */}
+                <div className="text-7xl mb-2">{skill.icon}</div>
+                {/* Skill name */}
+                <div className="text-sm font-medium text-center leading-tight max-w-24 truncate">
+                  {skill.name}
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
       
       {/* Tooltip positioned below the hovered skill */}

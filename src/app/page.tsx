@@ -63,7 +63,7 @@ export default function Home() {
         <section id="skills" className="py-20 px-4 bg-surface">
           <div className="max-w-7xl mx-auto">
             <motion.h2
-              className="text-3xl font-bold text-center mb-12"
+              className="text-3xl font-bold text-center mb-6"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
