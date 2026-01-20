@@ -25,7 +25,7 @@ const projects: Project[] = [
     techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Firebase", "Vercel"],
     features: ["Authentication", "Profile/Settings pages", "Support center", "Responsive design"],
     link: "https://jao-business-website-sample.vercel.app/",
-    screenshot: "https://via.placeholder.com/600x300/6366f1/ffffff?text=Business+Website+Sample"
+    screenshot: "https://picsum.photos/600/300?random=1"
   },
   {
     name: "Landing Page Website Sample",
@@ -33,7 +33,7 @@ const projects: Project[] = [
     techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
     features: ["Modular components", "Email signup", "Demo banner", "Responsive and accessible design"],
     link: "https://jao-landingpage-website-sample.vercel.app/",
-    screenshot: "https://via.placeholder.com/600x300/10b981/ffffff?text=Landing+Page+Sample"
+    screenshot: "https://picsum.photos/600/300?random=2"
   },
   {
     name: "Web Application Sample",
@@ -41,7 +41,7 @@ const projects: Project[] = [
     techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "localStorage", "Vercel"],
     features: ["Add/delete/edit expenses", "Persistent state", "Summary calculations", "Modern UI", "Offline-capable"],
     link: "https://jao-web-application-sample.vercel.app/",
-    screenshot: "https://via.placeholder.com/600x300/f59e0b/ffffff?text=Web+Application+Sample"
+    screenshot: "https://picsum.photos/600/300?random=3"
   },
   {
     name: "Wix Business Website",
@@ -49,7 +49,7 @@ const projects: Project[] = [
     techStack: ["Wix Studio", "Wix Hosting"],
     features: ["Responsive", "Wix Studio created website", "Integrated contact forms", "Mobile-friendly"],
     link: "https://jumpstarthost.wixsite.com/mysite",
-    screenshot: "https://via.placeholder.com/600x300/8b5cf6/ffffff?text=Wix+Business+Website"
+    screenshot: "https://picsum.photos/600/300?random=4"
   }
 ];
 
