@@ -115,10 +115,11 @@ const ProjectCarousel: React.FC = () => {
               x: { type: "spring", stiffness: 300, damping: 30 },
               opacity: { duration: 0.2 }
             }}
-            className="p-8 pl-20 pr-20"
+            className="flex flex-col md:flex-row gap-6 md:gap-8 p-4 md:p-8"
           >
-            <div className="mb-6">
-              <div className="relative w-full h-64 bg-gray-100 rounded-lg overflow-hidden border border-primary/20">
+            {/* Website Preview - Left Side */}
+            <div className="w-full md:w-1/2">
+              <div className="relative w-full h-64 md:h-80 bg-gray-100 rounded-lg overflow-hidden">
                 <iframe
                   src={currentProject.link}
                   className="w-full h-full"
@@ -141,36 +142,45 @@ const ProjectCarousel: React.FC = () => {
                 />
               </div>
             </div>
-            <h3 className="text-2xl font-bold text-text-primary mb-4 text-center">{currentProject.name}</h3>
-            <p className="text-text-secondary mb-6">{currentProject.description}</p>
 
-            <div className="mb-4">
-              <h4 className="text-lg font-semibold text-text-primary mb-2">Tech Stack</h4>
-              <div className="flex flex-wrap gap-2 justify-center">
-                {currentProject.techStack.map((tech, index) => {
-                  const IconComponent = techIcons[tech];
-                  return (
-                    <div key={index} className="flex items-center gap-2 bg-primary/20 text-primary px-3 py-1 rounded-full text-sm">
-                      {IconComponent && <IconComponent className="w-4 h-4" />}
-                      <span>{tech}</span>
-                    </div>
-                  );
-                })}
+            {/* Project Details - Right Side */}
+            <div className="w-full md:w-1/2 flex flex-col">
+              {/* View Live Website Button - At Top */}
+              <div className="mb-6">
+                <a
+                  href={currentProject.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-background px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 border-2 border-primary/50 w-full md:w-auto"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  View Live Website
+                </a>
               </div>
-            </div>
 
-            <div className="flex justify-center">
-              <a
-                href={currentProject.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-background px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 border-2 border-primary/50"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-                View Live Website
-              </a>
+              {/* Project Title */}
+              <h3 className="text-2xl md:text-3xl font-bold text-text-primary mb-4 text-center md:text-left">{currentProject.name}</h3>
+
+              {/* Project Description */}
+              <p className="text-text-secondary mb-6 text-center md:text-left leading-relaxed">{currentProject.description}</p>
+
+              {/* Tech Stack */}
+              <div className="flex-1">
+                <h4 className="text-lg font-semibold text-text-primary mb-3 text-center md:text-left">Tech Stack</h4>
+                <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+                  {currentProject.techStack.map((tech, index) => {
+                    const IconComponent = techIcons[tech];
+                    return (
+                      <div key={index} className="flex items-center gap-2 bg-primary/20 text-primary px-3 py-2 rounded-full text-sm font-medium">
+                        {IconComponent && <IconComponent className="w-4 h-4" />}
+                        <span>{tech}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>
