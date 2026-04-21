@@ -187,7 +187,7 @@ export default function CV() {
                   {cv.cta.startConversation}
                 </a>
                 <Link
-                  href="/"
+                  href="/#contact"
                   className="border border-primary text-primary hover:bg-primary hover:text-background px-8 py-3 rounded-lg font-semibold transition-colors"
                 >
                   {cv.cta.viewWork}
