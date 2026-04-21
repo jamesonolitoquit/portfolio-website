@@ -1,201 +1,264 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+'use client'
+
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 
 interface Skill {
-  name: string;
-  icon: string;
-  description: string;
+  name: string
+  icon: string
+  description: string
+  highlights: string[]
 }
 
 const skills: Skill[] = [
-  { name: "Next.js", icon: "🚀", description: "A React framework for production with server-side rendering and static site generation." },
-  { name: "TypeScript", icon: "💎", description: "A typed superset of JavaScript that compiles to plain JavaScript." },
-  { name: "Tailwind CSS", icon: "🎨", description: "A utility-first CSS framework for rapid UI development." },
-  { name: "Firebase", icon: "🔥", description: "A platform for building web and mobile applications with backend services." },
-  { name: "Vercel", icon: "△", description: "A platform for frontend frameworks and static sites with serverless functions." },
-  { name: "Wix Studio", icon: "🏗️", description: "A visual development platform for creating websites and web applications." },
-  { name: "React", icon: "⚛️", description: "A JavaScript library for building user interfaces." },
-  { name: "Responsive Design", icon: "📱", description: "Designing websites that work on all device sizes." },
-  { name: "PostgreSQL", icon: "🐘", description: "An advanced open-source relational database." },
-  { name: "MySQL", icon: "🗄️", description: "An open-source relational database management system." },
-  { name: "MongoDB", icon: "🍃", description: "A document-oriented NoSQL database." }
-];
+  {
+    name: 'Next.js',
+    icon: '🚀',
+    description:
+      'Production-ready React apps with routing, server rendering, and fast delivery.',
+    highlights: ['SSR', 'Routing', 'Performance'],
+  },
+  {
+    name: 'TypeScript',
+    icon: '💎',
+    description:
+      'Strong typing that keeps the codebase easier to scale, refactor, and maintain.',
+    highlights: ['Type safety', 'DX', 'Scale'],
+  },
+  {
+    name: 'Tailwind CSS',
+    icon: '🎨',
+    description:
+      'Utility-first styling for responsive interfaces and consistent design systems.',
+    highlights: ['Responsive UI', 'Design systems', 'Fast builds'],
+  },
+  {
+    name: 'Firebase',
+    icon: '🔥',
+    description:
+      'Backend services for authentication, data storage, and realtime features.',
+    highlights: ['Auth', 'Database', 'Realtime'],
+  },
+  {
+    name: 'Vercel',
+    icon: '△',
+    description:
+      'Simple, reliable deployment with previews and a smooth delivery workflow.',
+    highlights: ['Deployments', 'Preview URLs', 'Edge'],
+  },
+  {
+    name: 'Wix Studio',
+    icon: '🏗️',
+    description:
+      'Flexible website builds for marketing pages and client-friendly editing flows.',
+    highlights: ['Marketing sites', 'CMS', 'Client edits'],
+  },
+  {
+    name: 'React',
+    icon: '⚛️',
+    description:
+      'Component-driven interfaces that keep interactions organized and reusable.',
+    highlights: ['Components', 'State', 'Interactions'],
+  },
+  {
+    name: 'Responsive Design',
+    icon: '📱',
+    description:
+      'Mobile-first layouts that adapt cleanly to different screen sizes and devices.',
+    highlights: ['Mobile first', 'Accessibility', 'Layout'],
+  },
+  {
+    name: 'PostgreSQL',
+    icon: '🐘',
+    description:
+      'Relational data modeling with reliable queries and data integrity.',
+    highlights: ['Relational', 'Queries', 'Integrity'],
+  },
+  {
+    name: 'MySQL',
+    icon: '🗄️',
+    description:
+      'Practical database support for structured data and application records.',
+    highlights: ['Structured data', 'CRUD', 'Records'],
+  },
+  {
+    name: 'MongoDB',
+    icon: '🍃',
+    description:
+      'Flexible document storage for content-driven and schema-light applications.',
+    highlights: ['Documents', 'Flexible schema', 'Collections'],
+  },
+]
 
-const SkillCarousel: React.FC = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [rotation, setRotation] = useState(0);
-  const [hoveredSkill, setHoveredSkill] = useState<Skill | null>(null);
-  const [tooltipPosition, setTooltipPosition] = useState<{ x: number; y: number } | null>(null);
+const SkillCarousel = () => {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 767px)');
-
-    const handleChange = () => setIsMobile(mediaQuery.matches);
-
-    handleChange();
-    mediaQuery.addEventListener('change', handleChange);
-
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
-
-  // Auto-rotation functionality
-  useEffect(() => {
-    if (isHovered) return;
+    if (isPaused) return
 
     const interval = setInterval(() => {
-      setRotation((prev) => prev + 0.3); // Even slower for better visibility
-    }, 60);
+      setActiveIndex((current) => (current + 1) % skills.length)
+    }, 4500)
 
-    return () => clearInterval(interval);
-  }, [isHovered]);
+    return () => clearInterval(interval)
+  }, [isPaused])
 
-  const skillAngle = 360 / skills.length; // Degrees per skill
-
-  const rotateLeft = () => {
-    setRotation(prev => prev - skillAngle);
-  };
-
-  const rotateRight = () => {
-    setRotation(prev => prev + skillAngle);
-  };
-
-  const radius = 300; // Increased radius for larger carousel
-  const centerX = 350; // Adjusted center X position
-  const centerY = 200; // Adjusted center Y position for taller height
-
-  if (isMobile) {
-    return (
-      <div className="grid grid-cols-2 gap-3 sm:hidden">
-        {skills.map((skill) => (
-          <div
-            key={skill.name}
-            className="rounded-xl border border-primary/20 bg-surface/80 p-4 text-center shadow-lg"
-          >
-            <div className="text-4xl mb-2">{skill.icon}</div>
-            <div className="text-sm font-semibold text-text-primary">{skill.name}</div>
-          </div>
-        ))}
-      </div>
-    );
+  const goToPrevious = () => {
+    setActiveIndex((current) => (current - 1 + skills.length) % skills.length)
   }
 
+  const goToNext = () => {
+    setActiveIndex((current) => (current + 1) % skills.length)
+  }
+
+  const activeSkill = skills[activeIndex]
+
   return (
-    <div className="relative w-full flex justify-center items-center overflow-x-hidden">
+    <div className="mx-auto w-full max-w-6xl px-0 sm:px-2">
       <div
-        className="relative w-full flex justify-center items-center overflow-hidden"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        style={{ perspective: '1200px', height: 400, maxWidth: '100%' }} // Increased perspective for better 3D effect
+        className="relative overflow-hidden rounded-[2rem] border border-primary/20 bg-gradient-to-br from-surface via-surface to-background/80 shadow-2xl"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={() => setIsPaused(true)}
+        onTouchEnd={() => setIsPaused(false)}
       >
-        {/* Left Navigation Button */}
-        <button
-          onClick={rotateLeft}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full shadow-lg transition-colors duration-200"
-          aria-label="Rotate carousel left"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(129,140,248,0.18),_transparent_40%),radial-gradient(circle_at_bottom_left,_rgba(56,189,248,0.12),_transparent_35%)]" />
 
-        {/* Right Navigation Button */}
-        <button
-          onClick={rotateRight}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full shadow-lg transition-colors duration-200"
-          aria-label="Rotate carousel right"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
+        <div className="relative flex flex-col gap-4 border-b border-primary/10 px-4 py-4 sm:px-6 sm:py-5 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-primary/80">
+              Core toolkit
+            </p>
+            <h3 className="mt-1 text-2xl font-bold text-text-primary sm:text-3xl">
+              Skill Carousel
+            </h3>
+          </div>
 
-        <div
-          className="relative"
-          style={{
-            width: 700,
-            height: 400,
-            transformStyle: 'preserve-3d'
-          }}
-        >
-          {/* Skills positioned in 3D carousel */}
-          {skills.map((skill, index) => {
-            const angle = (index / skills.length) * 2 * Math.PI + (rotation * Math.PI) / 180;
-            const x = Math.sin(angle) * radius;
-            const z = Math.cos(angle) * radius;
+          <div className="flex items-center gap-2 self-start lg:self-auto">
+            <button
+              type="button"
+              onClick={goToPrevious}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-background/80 text-text-primary shadow-lg transition-colors hover:bg-primary hover:text-background"
+              aria-label="Previous skill"
+            >
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onClick={goToNext}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-background/80 text-text-primary shadow-lg transition-colors hover:bg-primary hover:text-background"
+              aria-label="Next skill"
+            >
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
 
-            // Calculate opacity and z-index based on position
-            const distanceFromCenter = Math.min(
-              Math.abs(angle % (2 * Math.PI)),
-              Math.abs((angle % (2 * Math.PI)) - 2 * Math.PI)
-            );
-            const normalizedDistance = Math.min(distanceFromCenter / Math.PI, 1);
-            const opacity = Math.max(0.05, 1 - normalizedDistance * 0.95); // More pronounced opacity fade
-            const zIndex = Math.floor(100 - normalizedDistance * 80);
-
-            return (
-              <motion.div
-                key={skill.name}
-                className="absolute flex flex-col items-center justify-center cursor-pointer select-none"
-                style={{
-                  left: centerX + x - 40, // Center the entire skill item
-                  top: centerY - 40,     // Center the entire skill item
-                  transform: `translateZ(${z}px)`,
-                  zIndex: zIndex,
-                  opacity: opacity,
-                }}
-                whileHover={{
-                  scale: 1.2,
-                  zIndex: 200,
-                  opacity: 1,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 25
-                }}
-                onMouseEnter={() => {
-                  setHoveredSkill(skill);
-                  setTooltipPosition({ x: centerX + x, y: centerY + 80 });
-                }}
-                onMouseLeave={() => {
-                  setHoveredSkill(null);
-                  setTooltipPosition(null);
-                }}
-                suppressHydrationWarning
-              >
-                {/* Icon */}
-                <div className="text-7xl mb-2">{skill.icon}</div>
-                {/* Skill name */}
-                <div className="text-sm font-medium text-center leading-tight max-w-24 truncate">
-                  {skill.name}
+        <div className="relative px-4 py-5 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeSkill.name}
+              initial={{ opacity: 0, y: 20, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -16, scale: 0.98 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+              className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]"
+            >
+              <div className="flex min-h-[240px] flex-col justify-between rounded-[1.75rem] border border-primary/20 bg-background/80 p-6 shadow-lg sm:p-8">
+                <div>
+                  <div className="mb-5 inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-primary/15 text-5xl shadow-inner sm:h-24 sm:w-24 sm:text-6xl">
+                    {activeSkill.icon}
+                  </div>
+                  <p className="text-sm font-semibold uppercase tracking-[0.28em] text-primary/80">
+                    {String(activeIndex + 1).padStart(2, '0')} / {String(skills.length).padStart(2, '0')}
+                  </p>
+                  <h4 className="mt-2 text-2xl font-bold text-text-primary sm:text-3xl">
+                    {activeSkill.name}
+                  </h4>
+                  <p className="mt-4 max-w-xl text-base leading-relaxed text-text-secondary sm:text-lg">
+                    {activeSkill.description}
+                  </p>
                 </div>
-              </motion.div>
-            );
-          })}
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {activeSkill.highlights.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-primary/15 bg-surface/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex flex-col justify-between rounded-[1.75rem] border border-primary/20 bg-surface/70 p-5 shadow-lg sm:p-6">
+                <div>
+                  <h5 className="text-sm font-semibold uppercase tracking-[0.28em] text-text-secondary">
+                    What it enables
+                  </h5>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+                    <div className="rounded-2xl border border-primary/10 bg-background/70 p-4">
+                      <p className="text-sm font-semibold text-text-primary">Cleaner delivery</p>
+                      <p className="mt-1 text-sm leading-relaxed text-text-secondary">
+                        Use the active skill to build faster without losing structure.
+                      </p>
+                    </div>
+                    <div className="rounded-2xl border border-primary/10 bg-background/70 p-4">
+                      <p className="text-sm font-semibold text-text-primary">Better mobile behavior</p>
+                      <p className="mt-1 text-sm leading-relaxed text-text-secondary">
+                        This layout scales from phone to desktop without fixed widths.
+                      </p>
+                    </div>
+                    <div className="rounded-2xl border border-primary/10 bg-background/70 p-4 sm:col-span-2 lg:col-span-1">
+                      <p className="text-sm font-semibold text-text-primary">Current focus</p>
+                      <p className="mt-1 text-sm leading-relaxed text-text-secondary">
+                        {activeSkill.name} stays front and center while the carousel rotates automatically or with manual controls.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 rounded-2xl border border-primary/10 bg-background/70 p-4">
+                  <p className="text-sm font-semibold text-text-primary">Interaction hint</p>
+                  <p className="mt-1 text-sm text-text-secondary">
+                    Tap the arrows or let it rotate. Hover pauses the motion on desktop.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        <div className="relative border-t border-primary/10 px-4 py-4 sm:px-6">
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {skills.map((skill, index) => (
+              <button
+                key={skill.name}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                className={`flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-medium transition-all ${
+                  index === activeIndex
+                    ? 'border-primary bg-primary text-background shadow-lg'
+                    : 'border-primary/15 bg-background/70 text-text-primary hover:border-primary/40 hover:bg-surface'
+                }`}
+                aria-label={`Go to ${skill.name}`}
+                aria-pressed={index === activeIndex}
+              >
+                <span aria-hidden="true">{skill.icon}</span>
+                <span>{skill.name}</span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
-      
-      {/* Tooltip positioned below the hovered skill */}
-      {hoveredSkill && tooltipPosition && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 10 }}
-          className="absolute bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg pointer-events-none z-50 max-w-xs text-center"
-          style={{
-            left: tooltipPosition.x,
-            top: tooltipPosition.y,
-            transform: 'translateX(-50%)'
-          }}
-          suppressHydrationWarning
-        >
-          <div className="font-semibold text-lg mb-1">{hoveredSkill.name}</div>
-          <div className="text-sm">{hoveredSkill.description}</div>
-        </motion.div>
-      )}
     </div>
-  );
-};
+  )
+}
 
-export default SkillCarousel;
+export default SkillCarousel
