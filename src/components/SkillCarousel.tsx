@@ -28,6 +28,7 @@ const SkillCarousel = () => {
   const [isHovered, setIsHovered] = useState(false)
   const [rotation, setRotation] = useState(0)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [mobilePaused, setMobilePaused] = useState(false)
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 767px)')
@@ -49,6 +50,16 @@ const SkillCarousel = () => {
 
     return () => clearInterval(interval)
   }, [isHovered, isMobile])
+
+  useEffect(() => {
+    if (!isMobile || mobilePaused) return
+
+    const interval = setInterval(() => {
+      setActiveIndex((current) => (current + 1) % skills.length)
+    }, 4200)
+
+    return () => clearInterval(interval)
+  }, [isMobile, mobilePaused])
 
   const skillAngle = 360 / skills.length
 
@@ -80,12 +91,12 @@ const SkillCarousel = () => {
 
       const distance = Math.abs(delta)
       const visible = distance <= 2
-      const translateX = delta * 74
-      const translateZ = distance === 0 ? 70 : -140 - distance * 50
-      const rotateY = delta * -18
-      const scale = distance === 0 ? 1 : distance === 1 ? 0.88 : 0.78
-      const opacity = distance === 0 ? 1 : distance === 1 ? 0.65 : 0.28
-      const zIndex = 50 - distance
+      const translateX = delta * 68
+      const translateZ = distance === 0 ? 120 : -120 - distance * 45
+      const rotateY = delta * -24
+      const scale = distance === 0 ? 1 : distance === 1 ? 0.9 : 0.82
+      const opacity = distance === 0 ? 1 : distance === 1 ? 0.7 : 0.36
+      const zIndex = 60 - distance
 
       return {
         skill,
@@ -100,60 +111,44 @@ const SkillCarousel = () => {
 
     return (
       <div className="mx-auto w-full max-w-6xl px-0 sm:px-2">
-        <div className="relative overflow-hidden rounded-[2rem] border border-primary/20 bg-gradient-to-br from-surface via-surface to-background/80 shadow-2xl">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(129,140,248,0.18),_transparent_40%),radial-gradient(circle_at_bottom_left,_rgba(56,189,248,0.12),_transparent_35%)]" />
-
-          <div className="relative flex items-center justify-between border-b border-primary/10 px-4 py-4 sm:px-6 sm:py-5">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.32em] text-primary/80">Core toolkit</p>
-              <h3 className="mt-1 text-2xl font-bold text-text-primary sm:text-3xl">Skill Carousel</h3>
-            </div>
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-text-secondary">
-              Mobile 3D
+        <div className="relative overflow-hidden px-2 py-4 sm:px-0">
+          <div
+            className="relative mx-auto h-[350px] w-full max-w-[420px] overflow-hidden"
+            style={{ perspective: '1200px' }}
+            onTouchStart={() => setMobilePaused(true)}
+            onTouchEnd={() => setMobilePaused(false)}
+          >
+            <div className="absolute inset-0 flex items-center justify-center">
+              {mobileItems.map(({ skill, visible, style }) =>
+                visible ? (
+                  <motion.button
+                    key={skill.name}
+                    type="button"
+                    onClick={() => setActiveIndex(skills.findIndex((item) => item.name === skill.name))}
+                    className="absolute flex h-[220px] w-[210px] flex-col justify-between rounded-[1.5rem] border border-primary/20 bg-background/90 p-5 text-left shadow-2xl backdrop-blur-sm"
+                    style={style}
+                    animate={{ opacity: style.opacity }}
+                    transition={{ type: 'spring', stiffness: 250, damping: 24 }}
+                    aria-label={skill.name}
+                  >
+                    <div>
+                      <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/15 bg-primary/15 text-3xl">
+                        {skill.icon}
+                      </div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary/80">
+                        {skill.name}
+                      </p>
+                      <p className="mt-3 text-sm leading-relaxed text-text-secondary">
+                        {skill.description}
+                      </p>
+                    </div>
+                  </motion.button>
+                ) : null,
+              )}
             </div>
           </div>
 
-          <div className="relative px-4 py-6 sm:px-6 sm:py-8">
-            <div
-              className="relative mx-auto h-[420px] w-full max-w-[420px] overflow-hidden"
-              style={{ perspective: '1100px' }}
-              onTouchStart={() => setIsHovered(true)}
-              onTouchEnd={() => setIsHovered(false)}
-            >
-              <div className="absolute inset-0 flex items-center justify-center">
-                {mobileItems.map(({ skill, visible, style }) =>
-                  visible ? (
-                    <motion.button
-                      key={skill.name}
-                      type="button"
-                      onClick={() => setActiveIndex(skills.findIndex((item) => item.name === skill.name))}
-                      className="absolute flex h-[250px] w-[230px] flex-col justify-between rounded-[1.75rem] border border-primary/20 bg-background/90 p-5 text-left shadow-2xl backdrop-blur-sm"
-                      style={style}
-                      animate={{ opacity: style.opacity }}
-                      transition={{ type: 'spring', stiffness: 260, damping: 26 }}
-                      aria-label={skill.name}
-                    >
-                      <div>
-                        <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/15 text-4xl">
-                          {skill.icon}
-                        </div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary/80">
-                          {skill.name}
-                        </p>
-                        <p className="mt-3 text-sm leading-relaxed text-text-secondary">
-                          {skill.description}
-                        </p>
-                      </div>
-                      <div className="mt-5 rounded-2xl border border-primary/10 bg-surface/80 px-3 py-2 text-center text-xs font-semibold uppercase tracking-[0.2em] text-text-primary">
-                        Tap arrows to rotate
-                      </div>
-                    </motion.button>
-                  ) : null,
-                )}
-              </div>
-            </div>
-
-            <div className="mt-4 flex items-center justify-center gap-3">
+          <div className="mt-4 flex items-center justify-center gap-3">
               <button
                 type="button"
                 onClick={rotateLeft}
@@ -174,22 +169,21 @@ const SkillCarousel = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
-            </div>
+          </div>
 
-            <div className="mt-5 flex justify-center gap-2 overflow-hidden px-2">
-              {skills.map((skill, index) => (
-                <button
-                  key={skill.name}
-                  type="button"
-                  onClick={() => setActiveIndex(index)}
-                  className={`h-2.5 rounded-full transition-all ${
-                    index === activeIndex ? 'w-8 bg-primary' : 'w-2.5 bg-text-secondary/30'
-                  }`}
-                  aria-label={`Go to ${skill.name}`}
-                  aria-pressed={index === activeIndex}
-                />
-              ))}
-            </div>
+          <div className="mt-4 flex justify-center gap-2 overflow-hidden px-2">
+            {skills.map((skill, index) => (
+              <button
+                key={skill.name}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                className={`h-2.5 rounded-full transition-all ${
+                  index === activeIndex ? 'w-8 bg-primary' : 'w-2.5 bg-text-secondary/30'
+                }`}
+                aria-label={`Go to ${skill.name}`}
+                aria-pressed={index === activeIndex}
+              />
+            ))}
           </div>
         </div>
       </div>
