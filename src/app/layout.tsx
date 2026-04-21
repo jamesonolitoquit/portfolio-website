@@ -8,6 +8,12 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://jameseonolitoquit.dev"),
   title: "Jameson Olitoquit | Full-Stack Developer (Next.js, TypeScript, Wix Studio)",
@@ -105,7 +111,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.className} antialiased bg-background text-text-primary`} suppressHydrationWarning>
+      <body className={`${inter.className} antialiased bg-background text-text-primary overflow-x-hidden`} suppressHydrationWarning>
         <ThemeProvider defaultTheme="dark">
           <AnimatedBackground />
           {children}

@@ -23,9 +23,21 @@ const skills: Skill[] = [
 
 const SkillCarousel: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [hoveredSkill, setHoveredSkill] = useState<Skill | null>(null);
   const [tooltipPosition, setTooltipPosition] = useState<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+
+    const handleChange = () => setIsMobile(mediaQuery.matches);
+
+    handleChange();
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   // Auto-rotation functionality
   useEffect(() => {
@@ -52,13 +64,29 @@ const SkillCarousel: React.FC = () => {
   const centerX = 350; // Adjusted center X position
   const centerY = 200; // Adjusted center Y position for taller height
 
+  if (isMobile) {
+    return (
+      <div className="grid grid-cols-2 gap-3 sm:hidden">
+        {skills.map((skill) => (
+          <div
+            key={skill.name}
+            className="rounded-xl border border-primary/20 bg-surface/80 p-4 text-center shadow-lg"
+          >
+            <div className="text-4xl mb-2">{skill.icon}</div>
+            <div className="text-sm font-semibold text-text-primary">{skill.name}</div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
-    <div className="relative w-full flex justify-center items-center">
+    <div className="relative w-full flex justify-center items-center overflow-x-hidden">
       <div
         className="relative w-full flex justify-center items-center overflow-hidden"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        style={{ perspective: '1200px', height: 400 }} // Increased perspective for better 3D effect
+        style={{ perspective: '1200px', height: 400, maxWidth: '100%' }} // Increased perspective for better 3D effect
       >
         {/* Left Navigation Button */}
         <button
