@@ -101,7 +101,7 @@ const ProjectCarousel: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto overflow-x-hidden">
+    <div className="relative w-full max-w-4xl mx-auto overflow-visible">
       <div className="mb-4 flex items-center justify-between gap-3 sm:hidden">
         <button
           onClick={prevProject}
