@@ -21,7 +21,7 @@ interface Project {
 const projects: Project[] = [
   {
     name: "Business Website Sample",
-    description: "A modern business website template for small businesses or startups, featuring sections for services, about, contact, and support.",
+    description: "Built for small businesses that needed a modern, trustworthy web presence. I designed a conversion-ready structure with clear services, support flows, and polished UX across devices.",
     techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Firebase", "Vercel"],
     features: ["Authentication", "Profile/Settings pages", "Support center", "Responsive design"],
     link: "https://jao-business-website-sample.vercel.app/",
@@ -29,7 +29,7 @@ const projects: Project[] = [
   },
   {
     name: "Landing Page Website Sample",
-    description: "A high-conversion landing page template for SaaS or product launches, with sections for features, pricing, testimonials, and demo signup.",
+    description: "Created for product launches that needed fast go-to-market pages. Focused on persuasive section flow, clear value messaging, and conversion-focused CTAs with responsive performance.",
     techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
     features: ["Modular components", "Email signup", "Demo banner", "Responsive and accessible design"],
     link: "https://jao-landingpage-website-sample.vercel.app/",
@@ -37,7 +37,7 @@ const projects: Project[] = [
   },
   {
     name: "Web Application Sample",
-    description: "A sample web application demonstrating client-side logic and state management, such as an Expense Tracker.",
+    description: "Developed to demonstrate reliable client-side logic for real user workflows. Implemented persistent state and intuitive interactions to keep the app fast, usable, and practical.",
     techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "localStorage", "Vercel"],
     features: ["Add/delete/edit expenses", "Persistent state", "Summary calculations", "Modern UI", "Offline-capable"],
     link: "https://jao-web-application-sample.vercel.app/",
@@ -45,7 +45,7 @@ const projects: Project[] = [
   },
   {
     name: "Wix Business Website",
-    description: "A Wix-based business site for showcasing services and contact information.",
+    description: "Delivered for businesses needing a quick but professional launch. Balanced visual polish with clear content hierarchy so visitors can understand offers and contact quickly.",
     techStack: ["Wix Studio", "Wix Hosting"],
     features: ["Responsive", "Wix Studio created website", "Integrated contact forms", "Mobile-friendly"],
     link: "https://jumpstarthost.wixsite.com/mysite",

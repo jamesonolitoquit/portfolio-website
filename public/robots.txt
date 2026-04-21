@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /__nextjs_original-stack-frame
+
+# Allow search engines to crawl favicons and fonts
+Allow: /favicon.svg
+Allow: /favicon.ico
+
+# Crawl delay (ms) - be respectful
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://jameseonolitoquit.dev/sitemap.xml

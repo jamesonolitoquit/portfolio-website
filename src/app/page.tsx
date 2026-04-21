@@ -43,6 +43,14 @@ export default function Home() {
             >
               {t.hero.role}
             </motion.p>
+            <motion.p
+              className="text-base md:text-lg text-text-secondary/90 mb-8 max-w-2xl mx-auto"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              {t.hero.subrole}
+            </motion.p>
             <motion.div
               className="flex gap-4 justify-center flex-wrap"
               initial={{ opacity: 0 }}
@@ -140,6 +148,15 @@ export default function Home() {
                 {t.contact.linkedin}
               </a>
             </motion.div>
+            <motion.p
+              className="text-text-secondary mb-8 max-w-2xl mx-auto"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              {t.contact.availability}
+            </motion.p>
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}

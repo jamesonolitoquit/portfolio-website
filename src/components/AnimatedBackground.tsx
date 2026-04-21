@@ -1,28 +1,23 @@
 'use client'
 
-import { motion } from "framer-motion";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { useTheme } from "@/components/ThemeProvider";
+import { useMemo } from "react";
 
 export function AnimatedBackground() {
   const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setPrefersReducedMotion(e.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
-  if (!mounted) return null;
+  const reduceMotion = useReducedMotion();
+  const prefersReducedMotion = reduceMotion ?? false;
+  const stars = useMemo(
+    () =>
+      Array.from({ length: 20 }, (_, i) => ({
+        left: `${(i * 37) % 100}%`,
+        top: `${(i * 23) % 60}%`,
+        duration: 2 + ((i * 7) % 4),
+        delay: ((i * 13) % 20) / 10,
+      })),
+    []
+  );
 
   const isDark = theme === "dark";
   const animationDuration = prefersReducedMotion ? 0 : 2;
@@ -170,22 +165,22 @@ export function AnimatedBackground() {
         ) : (
           // Stars for dark mode
           <>
-            {[...Array(20)].map((_, i) => (
+            {stars.map((star, i) => (
               <motion.div
                 key={i}
                 className="absolute"
                 style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 60}%`,
+                  left: star.left,
+                  top: star.top,
                 }}
                 animate={{
                   opacity: prefersReducedMotion ? 1 : [0.3, 1, 0.3],
                   scale: prefersReducedMotion ? 1 : [1, 1.2, 1],
                 }}
                 transition={{
-                  duration: prefersReducedMotion ? 0 : Math.random() * 3 + 2,
+                  duration: prefersReducedMotion ? 0 : star.duration,
                   repeat: Infinity,
-                  delay: Math.random() * 2,
+                  delay: star.delay,
                   ease: "easeInOut"
                 }}
               >

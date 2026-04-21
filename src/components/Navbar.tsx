@@ -1,13 +1,24 @@
 'use client'
 
-import { useTheme } from 'next-themes'
 import { usePathname } from 'next/navigation'
 import { Moon, Sun, Languages } from 'lucide-react'
+import { useTheme } from '@/components/ThemeProvider'
+
+interface NavLabels {
+  home: string
+  skills: string
+  projects: string
+  about: string
+  contact: string
+  cv: string
+}
 
 interface NavbarProps {
   language: string
   setLanguage: (lang: string) => void
-  translations: any
+  translations: {
+    nav: NavLabels
+  }
 }
 
 export default function Navbar({ language, setLanguage, translations }: NavbarProps) {
