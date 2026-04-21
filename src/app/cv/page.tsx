@@ -181,7 +181,7 @@ export default function CV() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href="mailto:jameson.olitoquit@gmail.com"
+                  href="/#contact"
                   className="bg-primary hover:bg-primary/90 text-background px-8 py-3 rounded-lg font-semibold transition-colors"
                 >
                   {cv.cta.startConversation}
